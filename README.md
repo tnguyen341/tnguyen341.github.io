@@ -1,24 +1,29 @@
-# Personal site (Next.js static export for GitHub Pages)
+# tnguyen341.github.io
 
-## Edit your content
-Everything is in `src/data/content.ts`. Search for `TODO` and replace each placeholder.
+Personal site and resume for Tyler Nguyen, live at [tnguyen341.github.io](https://tnguyen341.github.io).
 
-## Run locally
+Built with Next.js (static export), TypeScript, and plain CSS.
+
+## Structure
+
+- `src/data/content.ts` — all site copy: profile, about, experience, skills, education, projects, case studies.
+- `src/app/page.tsx` — home page.
+- `src/app/case-studies/` — individual case study pages.
+
+## Development
+
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run build      # static site is written to ./out
+npm run dev     # http://localhost:3000
+npm run build   # static site written to ./out
 ```
 
-## Deploy
-1. Create a GitHub repo and push this code to `main`.
-   - Repo named `<your-username>.github.io` gives you `https://<your-username>.github.io`.
-   - Any other name gives you `https://<your-username>.github.io/<repo-name>/`. The workflow sets the base path for you.
-2. In the repo, go to **Settings > Pages > Build and deployment > Source** and choose **GitHub Actions**.
-3. Push to `main`. The workflow in `.github/workflows/deploy.yml` builds and publishes.
+## Deployment
 
-## Gotchas
-- `next/image` optimization needs a server, so images are `unoptimized` in `next.config.mjs`. Pre-size images yourself.
-- No API routes, server actions, or middleware. A static export can't run them.
-- Put files like `resume.pdf` in `/public`. If deploying as a project site, reference them with the base path.
-- Before publishing, replace the placeholder metrics and check the Open Graph title and description in `layout.tsx`.
+Pushes to `main` trigger `.github/workflows/deploy.yml`, which builds the static export and publishes it to GitHub Pages via GitHub Actions.
+
+## Notes
+
+- `next/image` optimization needs a server, so images are `unoptimized` in `next.config.mjs`.
+- No API routes, server actions, or middleware — a static export can't run them.
+- Files in `/public` (e.g. the resume PDF) must be referenced with `NEXT_PUBLIC_BASE_PATH` prefixed, so links still resolve if this ever deploys as a project site instead of a user site.
