@@ -1,7 +1,9 @@
-import { about, education, experience, profile, projects, skills } from "@/data/content";
+import Link from "next/link";
+import { about, caseStudies, education, experience, profile, projects, skills } from "@/data/content";
 
 const nav = [
   { href: "#about", label: "About" },
+  { href: "#featured", label: "Case Study" },
   { href: "#projects", label: "Projects" },
   { href: "#resume", label: "Resume" },
 ];
@@ -43,6 +45,19 @@ export default function Home() {
           ))}
         </section>
 
+        <section id="featured" aria-labelledby="featured-h">
+          <h2 id="featured-h">Case Study</h2>
+          {caseStudies.map((c) => (
+            <Link key={c.slug} href={`/case-studies/${c.slug}`} className="featured">
+              <span className="featured-stat">
+                <strong>{c.stat.value}</strong> {c.stat.label}
+              </span>
+              <span className="featured-title">{c.title}</span>
+              <span className="featured-cta">Read the case study →</span>
+            </Link>
+          ))}
+        </section>
+
         <section id="projects" aria-labelledby="projects-h">
           <h2 id="projects-h">Projects</h2>
           <ul className="list">
@@ -76,7 +91,7 @@ export default function Home() {
           <div className="section-head">
             <h2 id="resume-h">Resume</h2>
             {profile.resumeUrl ? (
-              <a className="button" href={profile.resumeUrl} download>
+              <a className="button" href={profile.resumeUrl} download={profile.resumeFilename}>
                 Download PDF
               </a>
             ) : null}
